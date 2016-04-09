@@ -22,6 +22,7 @@ public class BulletCollision : MonoBehaviour {
     {
         m_particule.gameObject.SetActive(true);
         GetComponent<MeshRenderer>().enabled = false;
+        GetComponent<SphereCollider>().enabled = false;
         StartCoroutine(MyCoroutine(gameObject.transform, gameObject));
     }
     
