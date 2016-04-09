@@ -20,7 +20,7 @@ public class DistanceIAControler : AbstractIAControler {
 
     protected override void Attack()
     {
-        if (!Physics.Linecast(transform.position, target.position) && Time.time > nextFire)
+        if (Time.time > nextFire)
         {
             nextFire = Time.time + fireRate;
 
@@ -28,30 +28,11 @@ public class DistanceIAControler : AbstractIAControler {
             GameObject projectile = GameObject.Instantiate(m_projectile, transform.position + normalizedDirection * 2f, transform.rotation) as GameObject;
             Rigidbody rb = projectile.GetComponent<Rigidbody>();
 
-            Vector3 ballisticVelocity = GetBallisticVelocity(target, RandomDevice.NextInt(15, 60));
+            Vector3 ballisticVelocity = GetBallisticVelocity(target.position, RandomDevice.NextInt(15, 60));
 
             rb.AddForce(ballisticVelocity, ForceMode.Impulse);
         }
     }
 
-    private Vector3 GetBallisticVelocity(Transform targetVec, float angle)
-    {
-        Vector3 dir = target.position - transform.position;
-
-        float h = dir.y;
-
-        dir.y = 0;
-
-        float dist = dir.magnitude;
-
-        float a = angle * Mathf.Deg2Rad;
-
-        dir.y = dist * Mathf.Tan(a);
-
-        dist += h / Mathf.Tan(a);
-
-        float vel = Mathf.Sqrt(dist * Physics.gravity.magnitude / Mathf.Sin(2 * a));
-
-        return vel * dir.normalized;
-    }
+    
 }

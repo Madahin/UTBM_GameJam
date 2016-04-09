@@ -36,12 +36,15 @@ public abstract class AbstractIAControler : MonoBehaviour {
 	protected virtual void Update ()
     {
         distanceBetweenTarget = Vector3.Distance(transform.position, target.position);
-
+        
         if (distanceBetweenTarget > minDistance && distanceBetweenTarget < maxDistance)
         {
             agent.Resume();
 
-            if (!Physics.Linecast(transform.position, target.position))
+            RaycastHit hit;
+            bool hasHit = Physics.Linecast(transform.position, target.position, out hit);
+
+            if (!hasHit || hit.transform.gameObject.name == "Barbie")
             {
                 hasSawPlayer = true;
             }
@@ -62,6 +65,12 @@ public abstract class AbstractIAControler : MonoBehaviour {
         }
     }
 
+    protected virtual void LateUpdate()
+    {
+        transform.rotation = Camera.main.transform.rotation;
+        Debug.Log("aa");
+    }
+
     protected virtual void SanitizeAttribute()
     {
         Assert.IsTrue(minDistance < maxDistance);
@@ -72,7 +81,7 @@ public abstract class AbstractIAControler : MonoBehaviour {
     {
         // Update the way to the goal every second.
         elapsed += Time.deltaTime;
-        if (elapsed > 1.0f)
+        if (elapsed > 0.1f)
         {
             elapsed -= 1.0f;
             NavMesh.CalculatePath(transform.position, target.position, NavMesh.AllAreas, path);
@@ -80,15 +89,27 @@ public abstract class AbstractIAControler : MonoBehaviour {
         }
         for (int i = 0; i < path.corners.Length - 1; i++)
             Debug.DrawLine(path.corners[i], path.corners[i + 1], Color.red);
-        // Update the way to the goal every second.
-        elapsed += Time.deltaTime;
-        if (elapsed > 1.0f)
-        {
-            elapsed -= 1.0f;
-            NavMesh.CalculatePath(transform.position, target.position, NavMesh.AllAreas, path);
-        }
-        for (int i = 0; i < path.corners.Length - 1; i++)
-            Debug.DrawLine(path.corners[i], path.corners[i + 1], Color.red);
+    }
+
+    protected Vector3 GetBallisticVelocity(Vector3 targetVec, float angle)
+    {
+        Vector3 dir = targetVec - transform.position;
+
+        float h = dir.y;
+
+        dir.y = 0;
+
+        float dist = dir.magnitude;
+
+        float a = angle * Mathf.Deg2Rad;
+
+        dir.y = dist * Mathf.Tan(a);
+
+        dist += h / Mathf.Tan(a);
+
+        float vel = Mathf.Sqrt(dist * Physics.gravity.magnitude / Mathf.Sin(2 * a));
+
+        return vel * dir.normalized;
     }
 
     protected abstract void Attack();
