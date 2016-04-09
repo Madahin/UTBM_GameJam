@@ -12,6 +12,8 @@ public class PlayerControler : MonoBehaviour {
     
     public float height = 1.5f;
 
+    public float projectilForce = 30f;
+
     public GameObject m_projectile;
     public float fireRate = 0.5F;
     private float nextFire = 0.0F;
@@ -35,9 +37,9 @@ public class PlayerControler : MonoBehaviour {
         if (Input.GetButton("Fire1") && Time.time > nextFire)
         {
             nextFire = Time.time + fireRate;
-            GameObject projectile = GameObject.Instantiate(m_projectile, transform.position, transform.rotation) as GameObject;
+            GameObject projectile = GameObject.Instantiate(m_projectile, transform.position + transform.forward*2f, transform.rotation) as GameObject;
             Rigidbody rb = projectile.GetComponent<Rigidbody>();
-            rb.AddForce(transform.forward * 10, ForceMode.Impulse);
+            rb.AddForce(transform.forward * projectilForce, ForceMode.Impulse);
         }
     }
 
