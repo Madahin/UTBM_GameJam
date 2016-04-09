@@ -2,20 +2,23 @@
 using System.Collections;
 using UnityEditor;
 
-public class PlayerControler : MonoBehaviour {
+public class PlayerControler : MonoBehaviour
+{
 
-    [Range(0.0f, 10.0f)]
-    public float MoveSpeedFactor = 0.5f;
+    //[Range(0.0f, 10.0f)]
+    public float moveFactor = 0.5f;
 
-    [Range(0.0f, 10.0f)]
+    [Range(0.0f, 100.0f)]
     public float MouseSpeedFactor = 1.5f;
-    
-    public float height = 1.5f;
 
-    public float projectilForce = 30f;
+    public float ExpulseForce = 10.0f;
+
+    public float height = 1.5f;
 
     public GameObject m_projectile;
     public float fireRate = 0.5F;
+    private Camera mainCamera;
+    private Rigidbody rigidBody;
     private float nextFire = 0.0F;
     public float thrust;
 
@@ -25,62 +28,74 @@ public class PlayerControler : MonoBehaviour {
     }
 
     // Use this for initialization
-    void Start ()
+    void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
-	}
-	
+        mainCamera = this.GetComponentInChildren<Camera>();
+        rigidBody = this.GetComponent<Rigidbody>();
+    }
+
 
 
     void FixedUpdate()
     {
+        float horizontal = Input.GetAxis("Horizontal");
+        float vertical = Input.GetAxis("Vertical");
+
+
+        Vector3 direction = mainCamera.transform.forward * vertical + mainCamera.transform.right * horizontal;
+        direction.Normalize();
+        rigidBody.MovePosition(rigidBody.position + direction * moveFactor * Time.fixedDeltaTime);
+
+
+
         if (Input.GetButton("Fire1") && Time.time > nextFire)
         {
             nextFire = Time.time + fireRate;
-            GameObject projectile = GameObject.Instantiate(m_projectile, transform.position + transform.forward*2f, transform.rotation) as GameObject;
+            GameObject projectile = GameObject.Instantiate(m_projectile, mainCamera.transform.position + mainCamera.transform.forward * 0.5f, mainCamera.transform.rotation) as GameObject;
             Rigidbody rb = projectile.GetComponent<Rigidbody>();
-            rb.AddForce(transform.forward * projectilForce, ForceMode.Impulse);
+            rb.AddForce(mainCamera.transform.forward * ExpulseForce, ForceMode.Impulse);
         }
     }
 
-	// Update is called once per frame
-	void Update ()
+    // Update is called once per frame
+    void Update()
     {
         /***********************************************************/
-        /*                 SHIT                                    */
-        /***********************************************************/ 
+        /*               DICKBUTT  SHIT                            */
+        /***********************************************************/
         if (Input.GetKey(KeyCode.Escape))
             EditorApplication.isPlaying = false;
 
 
-        gameObject.transform.Translate(Input.GetAxis("Horizontal") * MoveSpeedFactor,
+        /*gameObject.transform.Translate(Input.GetAxis("Horizontal") * MoveSpeedFactor,
                                        0f,
                                        Input.GetAxis("Vertical") * MoveSpeedFactor);
 
         gameObject.transform.position = new Vector3(gameObject.transform.position.x,
                                                     height,
-                                                    gameObject.transform.position.z);
+                                                    gameObject.transform.position.z);*/
 
-        gameObject.transform.Rotate(-Input.GetAxis("Mouse Y") * MouseSpeedFactor, 0f, 0f);
-        gameObject.transform.Rotate(0f, Input.GetAxis("Mouse X") * MouseSpeedFactor, 0f);
+        mainCamera.transform.Rotate(-Input.GetAxis("Mouse Y") * MouseSpeedFactor * Time.deltaTime, 0f, 0f);
+        mainCamera.transform.Rotate(0f, Input.GetAxis("Mouse X") * MouseSpeedFactor * Time.deltaTime, 0f);
 
-        float gimbalLock = gameObject.transform.rotation.eulerAngles.x;
+        float gimbalLock = mainCamera.transform.rotation.eulerAngles.x;
 
         if (gimbalLock >= 269 && gimbalLock < 275)
         {
             gimbalLock = 275f;
         }
 
-        if(gimbalLock >= 87 && gimbalLock < 91)
+        if (gimbalLock >= 87 && gimbalLock < 91)
         {
             gimbalLock = 88f;
         }
 
-        gameObject.transform.rotation = Quaternion.Euler(gimbalLock,
-                                                         gameObject.transform.rotation.eulerAngles.y,
+        mainCamera.transform.rotation = Quaternion.Euler(gimbalLock,
+                                                         mainCamera.transform.rotation.eulerAngles.y,
                                                          0f);
 
-        
+
 
 
     }

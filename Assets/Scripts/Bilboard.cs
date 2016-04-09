@@ -11,7 +11,7 @@ public class Bilboard : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         
-        this.transform.rotation = Camera.main.transform.parent.rotation;
+        this.transform.rotation = Camera.main.transform.rotation;
     }
     
 }
