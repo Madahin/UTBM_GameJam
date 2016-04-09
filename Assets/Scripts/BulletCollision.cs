@@ -10,10 +10,6 @@ public class BulletCollision : MonoBehaviour {
     public Transform target;
 
     void Start () {
-
-        Debug.Log("Active Self: " + m_particule.gameObject.activeSelf);
-        Debug.Log("Active in Hierarchy" + m_particule.gameObject.activeInHierarchy);
-
         m_particule.gameObject.SetActive(false);
     }
 	
@@ -31,11 +27,9 @@ public class BulletCollision : MonoBehaviour {
     
     IEnumerator MyCoroutine(Transform target, GameObject objet)
     {
-        print("Reached the target.");
 
         yield return new WaitForSeconds(1f);
 
-        
         Destroy(objet);
     }
     
