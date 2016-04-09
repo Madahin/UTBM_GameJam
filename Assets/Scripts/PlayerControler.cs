@@ -6,7 +6,8 @@ public class PlayerControler : MonoBehaviour
 {
 
     //[Range(0.0f, 10.0f)]
-    public float moveFactor = 0.5f;
+    public float MaxSpeed;
+    public float Speed;
 
     [Range(0.0f, 100.0f)]
     public float MouseSpeedFactor = 1.5f;
@@ -41,12 +42,17 @@ public class PlayerControler : MonoBehaviour
     {
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
-        float yVelocity = rigidBody.velocity.y;
+        //float yVelocity = rigidBody.velocity.y;
 
         Vector3 direction = mainCamera.transform.forward * vertical + mainCamera.transform.right * horizontal;
         direction.y = 0.0f;
         direction.Normalize();
-        rigidBody.velocity = direction * moveFactor + Vector3.up * yVelocity;
+
+        Vector3 speedVector = new Vector3(rigidBody.velocity.x, 0.0f, rigidBody.velocity.z);
+        if (speedVector.magnitude <= MaxSpeed)
+            rigidBody.AddForce(direction * Speed, ForceMode.Impulse);
+
+        //rigidBody.velocity = direction * moveFactor + Vector3.up * yVelocity;
             
 
 
