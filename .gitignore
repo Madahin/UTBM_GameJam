@@ -4,11 +4,15 @@
 Temp/
 Obj/
 UnityGenerated/
+Library/*
+Library
 Library/
 Library/metadata
 Library/assetDatabase3
 Library/AssetServerCacheV3
 Library/ScriptMapper
+Library/shadercompiler-UnityShaderCompiler.exe0.log
+*.log
 # ===================================== #
 # Visual Studio / MonoDevelop generated #
 # ===================================== #
