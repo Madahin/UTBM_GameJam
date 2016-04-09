@@ -8,6 +8,8 @@ public class PlayerControler : MonoBehaviour {
 
     [Range(0.0f, 10.0f)]
     public float MouseSpeedFactor = 1.5f;
+    
+    public float height = 1.5f;
 
     // Use this for initialization
     void Start ()
@@ -23,7 +25,7 @@ public class PlayerControler : MonoBehaviour {
                                        Input.GetAxis("Vertical") * MoveSpeedFactor);
 
         gameObject.transform.position = new Vector3(gameObject.transform.position.x,
-                                                    0f,
+                                                    height,
                                                     gameObject.transform.position.z);
 
         gameObject.transform.Rotate(-Input.GetAxis("Mouse Y") * MouseSpeedFactor, 0f, 0f);
