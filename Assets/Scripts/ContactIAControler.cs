@@ -25,11 +25,11 @@ public class ContactIAControler : AbstractIAControler {
         {
             nextFire = Time.time + fireRate;
 
-            int angle = 20;
+            int angle = 25;
             Vector3 pushForce;
             do
             {
-                pushForce = GetBallisticVelocity((target.position - transform.position).normalized * 7000f, angle);
+                pushForce = GetBallisticVelocity((target.position - transform.position).normalized * 10000f, angle);
                 angle--;
             } while (float.IsNaN(pushForce.x) || float.IsNaN(pushForce.y) || float.IsNaN(pushForce.z));
 
