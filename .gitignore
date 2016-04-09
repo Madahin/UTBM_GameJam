@@ -1,4 +1,34 @@
-Temp
-*.meta
+# =============== #
+# Unity generated #
+# =============== #
+Temp/
+Obj/
+UnityGenerated/
+Library/
 Library/metadata
-Library/ShaderCache
+
+# ===================================== #
+# Visual Studio / MonoDevelop generated #
+# ===================================== #
+Unity/ExportedObj/
+*.svd
+*.userprefs
+*.csproj
+*.pidb
+*.suo
+*.sln
+*.user
+*.unityproj
+*.booproj
+
+# ============ #
+# OS generated #
+# ============ #
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Icon?
+ehthumbs.db
+Thumbs.db
