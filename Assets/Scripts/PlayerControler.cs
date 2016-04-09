@@ -41,12 +41,13 @@ public class PlayerControler : MonoBehaviour
     {
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
-
+        float yVelocity = rigidBody.velocity.y;
 
         Vector3 direction = mainCamera.transform.forward * vertical + mainCamera.transform.right * horizontal;
         direction.y = 0.0f;
         direction.Normalize();
-        rigidBody.MovePosition(rigidBody.position + direction * moveFactor * Time.fixedDeltaTime);
+        rigidBody.velocity = direction * moveFactor + Vector3.up * yVelocity;
+            
 
 
 
