@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEditor;
 
 public class PlayerControler : MonoBehaviour {
 
@@ -11,15 +12,45 @@ public class PlayerControler : MonoBehaviour {
     
     public float height = 1.5f;
 
+    public GameObject m_projectile;
+    public float fireRate = 0.5F;
+    private float nextFire = 0.0F;
+    public float thrust;
+
+    void Awake()
+    {
+        GameManager.Instance.Player = this.gameObject;
+    }
+
     // Use this for initialization
     void Start ()
     {
-	
+        Cursor.lockState = CursorLockMode.Locked;
 	}
 	
+
+
+    void FixedUpdate()
+    {
+        if (Input.GetButton("Fire1") && Time.time > nextFire)
+        {
+            nextFire = Time.time + fireRate;
+            GameObject projectile = GameObject.Instantiate(m_projectile, transform.position, transform.rotation) as GameObject;
+            Rigidbody rb = projectile.GetComponent<Rigidbody>();
+            rb.AddForce(transform.forward * 10, ForceMode.Impulse);
+        }
+    }
+
 	// Update is called once per frame
 	void Update ()
     {
+        /***********************************************************/
+        /*                 SHIT                                    */
+        /***********************************************************/ 
+        if (Input.GetKey(KeyCode.Escape))
+            EditorApplication.isPlaying = false;
+
+
         gameObject.transform.Translate(Input.GetAxis("Horizontal") * MoveSpeedFactor,
                                        0f,
                                        Input.GetAxis("Vertical") * MoveSpeedFactor);
@@ -46,6 +77,9 @@ public class PlayerControler : MonoBehaviour {
         gameObject.transform.rotation = Quaternion.Euler(gimbalLock,
                                                          gameObject.transform.rotation.eulerAngles.y,
                                                          0f);
+
+        
+
 
     }
 }

@@ -5,6 +5,7 @@ using System.Collections;
 public class GameManager : Singleton<GameManager> {
 
     public FadeScreenAutoRef fadeScreen;
+    public GameObject Player;
     public string currentScene;
 
    
