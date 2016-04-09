@@ -6,7 +6,9 @@ Obj/
 UnityGenerated/
 Library/
 Library/metadata
-
+Library/assetDatabase3
+Library/AssetServerCacheV3
+Library/ScriptMapper
 # ===================================== #
 # Visual Studio / MonoDevelop generated #
 # ===================================== #
