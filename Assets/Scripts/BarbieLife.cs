@@ -20,12 +20,12 @@ public class BarbieLife : MonoBehaviour {
 
     void OnCollisionEnter(Collision col)
     {
-       if ( col.gameObject.tag == "projectile")
+       if ( col.gameObject.tag == "EnemieProjectile")
         {
             // dégat a changer
             this.decreaseLife(1);
 
-            Debug.Log("Vie de barbapute : "+this.life);
+            Debug.Log("Vie de barbapute : " + this.life);
         }
     }
 }
