@@ -68,7 +68,6 @@ public abstract class AbstractIAControler : MonoBehaviour {
     protected virtual void LateUpdate()
     {
         transform.rotation = Camera.main.transform.rotation;
-        Debug.Log("aa");
     }
 
     protected virtual void SanitizeAttribute()
