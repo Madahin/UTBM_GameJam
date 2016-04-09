@@ -44,6 +44,7 @@ public class PlayerControler : MonoBehaviour
 
 
         Vector3 direction = mainCamera.transform.forward * vertical + mainCamera.transform.right * horizontal;
+        direction.y = 0.0f;
         direction.Normalize();
         rigidBody.MovePosition(rigidBody.position + direction * moveFactor * Time.fixedDeltaTime);
 
