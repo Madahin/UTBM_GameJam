@@ -28,9 +28,9 @@ public class BulletCollision : MonoBehaviour {
     IEnumerator MyCoroutine(Transform target, GameObject objet)
     {
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(3f);
 
-        Destroy(objet);
+        DestroyImmediate(objet);
     }
     
 }
