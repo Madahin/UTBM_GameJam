@@ -40,7 +40,7 @@ public class AudioClipRandomizer : MonoBehaviour {
 
     private IEnumerator playDelayed()
     {
-        yield return new WaitForSeconds(Random.Range(2.0f, 5.0f));
+        yield return new WaitForSeconds(Random.Range(10.0f, 15.0f));
         checkClip = true;
         setClip();
     }

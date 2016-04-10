@@ -31,6 +31,13 @@ public class DistanceIAControler : AbstractIAControler {
             Vector3 ballisticVelocity = GetBallisticVelocity(target.position, RandomDevice.NextInt(15, 60));
 
             rb.AddForce(ballisticVelocity, ForceMode.Impulse);
+
+            SoundOnAttack soa = GetComponent<SoundOnAttack>();
+
+            if(soa != null)
+            {
+                soa.Play();
+            }
         }
     }
 

@@ -25,6 +25,13 @@ public class BarbieLife : MonoBehaviour {
         life = life - degats;
         if(life == -1)
         {
+            SoundOnDommage sod = GetComponent<SoundOnDommage>();
+
+            if (sod != null)
+            {
+                sod.Play();
+            }
+
             _controller.enabled = false;
             _rigidBody.detectCollisions = false;
             _colider.enabled = false;
@@ -47,15 +54,16 @@ public class BarbieLife : MonoBehaviour {
             this.transform.rotation = Quaternion.Slerp(initialRot, finalRot, _timer / _reachTime);
             yield return new WaitForEndOfFrame();
         }
+
     }
 
     void OnCollisionEnter(Collision col)
     {
-       if ( col.gameObject.tag == "EnemieProjectile")
+        if (col.gameObject.tag == "EnemieProjectile")
         {
             // dégat a changer
             this.decreaseLife(1);
-            
+
         }
     }
 }
