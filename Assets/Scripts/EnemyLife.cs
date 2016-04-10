@@ -41,7 +41,6 @@ public class EnemyLife : MonoBehaviour {
         particleObject.SetActive(true);
         yield return new WaitForSeconds(1f);
         Destroy(gameObject);
-        Debug.Log("dead");
         yield return null;
     }
 

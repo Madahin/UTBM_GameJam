@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class GameManager : Singleton<GameManager> {
 
@@ -22,9 +23,17 @@ public class GameManager : Singleton<GameManager> {
 
     public void LoadLevel(string levelName)
     {
-
+        fadeScreen.FadeOut();
+        StartCoroutine(DelayedLoadLevel(levelName));
     }
 
+    private IEnumerator DelayedLoadLevel(string levelString)
+    {
+        yield return new WaitForSeconds(3.0f);
+        //Application.LoadLevel(levelString);
+        SceneManager.LoadScene(levelString);
+
+    }
     
 
 }

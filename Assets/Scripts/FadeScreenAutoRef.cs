@@ -47,8 +47,21 @@ public class FadeScreenAutoRef : MonoBehaviour {
 
     public void FadeOut()
     {
+        _opaqueColor = new Color(fadeScreen.color.r,
+                                    fadeScreen.color.g,
+                                    fadeScreen.color.b,
+                                    fadeScreen.color.a);
 
+        _transparentColor = new Color(fadeScreen.color.r,
+                                        fadeScreen.color.g,
+                                        fadeScreen.color.b,
+                                        0.0f);
+
+        StopCoroutine(FadeInDelayed());
+        _fadeTimer = 0.0f;
+        StartCoroutine(FadeOutDelayed());
     }
+
 
     private IEnumerator FadeOutDelayed()
     {

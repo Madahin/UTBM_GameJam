@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 
 public class PlayerControler : MonoBehaviour
 {
@@ -72,9 +74,10 @@ public class PlayerControler : MonoBehaviour
         /***********************************************************/
         /*               DICKBUTT  SHIT                            */
         /***********************************************************/
+#if UNITY_EDITOR
         if (Input.GetKey(KeyCode.Escape))
             EditorApplication.isPlaying = false;
-
+#endif
 
         /*gameObject.transform.Translate(Input.GetAxis("Horizontal") * MoveSpeedFactor,
                                        0f,

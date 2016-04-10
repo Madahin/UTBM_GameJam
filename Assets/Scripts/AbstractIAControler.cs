@@ -74,6 +74,7 @@ public abstract class AbstractIAControler : MonoBehaviour {
 
     protected virtual void LateUpdate()
     {
+        if(Camera.main != null)
         transform.rotation = Camera.main.transform.rotation;
     }
 

@@ -24,8 +24,7 @@ public class BarbieLife : MonoBehaviour {
         {
             // dégat a changer
             this.decreaseLife(1);
-
-            Debug.Log("Vie de barbapute : " + this.life);
+            
         }
     }
 }
