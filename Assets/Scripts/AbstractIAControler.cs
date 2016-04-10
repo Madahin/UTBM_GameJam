@@ -20,6 +20,8 @@ public abstract class AbstractIAControler : MonoBehaviour {
 
     protected NavMeshAgent agent;
 
+    private bool stop = false;
+
     // Use this for initialization
     protected virtual void Start ()
     {
@@ -37,7 +39,7 @@ public abstract class AbstractIAControler : MonoBehaviour {
     {
         distanceBetweenTarget = Vector3.Distance(transform.position, target.position);
         
-        if (distanceBetweenTarget > minDistance && distanceBetweenTarget < maxDistance)
+        if (!stop && distanceBetweenTarget > minDistance && distanceBetweenTarget < maxDistance)
         {
             agent.Resume();
 
@@ -59,10 +61,15 @@ public abstract class AbstractIAControler : MonoBehaviour {
             agent.Stop();
         }
 
-        if(distanceBetweenTarget < attackDistance)
+        if(!stop && distanceBetweenTarget < attackDistance)
         {
             Attack();
         }
+    }
+
+    public void Stop()
+    {
+        stop = true;
     }
 
     protected virtual void LateUpdate()
