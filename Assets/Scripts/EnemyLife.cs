@@ -7,11 +7,10 @@ public class EnemyLife : MonoBehaviour {
 
     private bool isDead = false;
 
-    private GameObject particleObject;
+    public GameObject particleObject;
 
     void Start()
     {
-        particleObject = GetComponent<ParticleSystem>().gameObject;
         particleObject.SetActive(false);
     }
 
@@ -37,11 +36,12 @@ public class EnemyLife : MonoBehaviour {
     {
         GetComponent<AbstractIAControler>().Stop();
         GetComponent<MeshRenderer>().enabled = false;
-        GetComponent<BoxCollider>().enabled = false;
+        GetComponent<CapsuleCollider>().enabled = false;
 
         particleObject.SetActive(true);
         yield return new WaitForSeconds(1f);
         Destroy(gameObject);
+        Debug.Log("dead");
         yield return null;
     }
 
