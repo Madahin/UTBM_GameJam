@@ -39,7 +39,14 @@ public class EnemyLife : MonoBehaviour {
         GetComponent<CapsuleCollider>().enabled = false;
 
         particleObject.SetActive(true);
-        yield return new WaitForSeconds(1f);
+
+        SoundOnDie sod = GetComponent<SoundOnDie>();
+        if(sod != null)
+        {
+            sod.Play();
+        }
+
+        yield return new WaitForSeconds(3f);
         Destroy(gameObject);
         yield return null;
     }

@@ -16,6 +16,18 @@ public class BarbieLife : MonoBehaviour {
     {
         // check si barbie die
         life = life - degats;
+
+        SoundOnDommage sod = GetComponent<SoundOnDommage>();
+
+        if(sod != null)
+        {
+            sod.Play();
+        }
+
+        if(life == 0)
+        {
+            GameManager.Instance.LoadLevel("GameOver");
+        }
     }
 
     void OnCollisionEnter(Collision col)

@@ -36,6 +36,13 @@ public class ContactIAControler : AbstractIAControler {
             if (angle <= 0) return;
             target.gameObject.GetComponent<Rigidbody>().AddForce(pushForce, ForceMode.Impulse);
             target.GetComponent<BarbieLife>().decreaseLife(1);
+
+            SoundOnAttack soa = GetComponent<SoundOnAttack>();
+
+            if (soa != null)
+            {
+                soa.Play();
+            }
         }
     }
 }
