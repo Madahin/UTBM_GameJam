@@ -13,6 +13,7 @@ Library/AssetServerCacheV3
 Library/ScriptMapper
 Library/shadercompiler-UnityShaderCompiler.exe0.log
 *.log
+build
 # ===================================== #
 # Visual Studio / MonoDevelop generated #
 # ===================================== #
