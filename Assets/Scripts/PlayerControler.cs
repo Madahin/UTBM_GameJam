@@ -74,10 +74,11 @@ public class PlayerControler : MonoBehaviour
         /***********************************************************/
         /*               DICKBUTT  SHIT                            */
         /***********************************************************/
-#if UNITY_EDITOR
+
         if (Input.GetKey(KeyCode.Escape))
-            EditorApplication.isPlaying = false;
-#endif
+            GameManager.Instance.LoadLevel("Menu");
+
+
 
         /*gameObject.transform.Translate(Input.GetAxis("Horizontal") * MoveSpeedFactor,
                                        0f,

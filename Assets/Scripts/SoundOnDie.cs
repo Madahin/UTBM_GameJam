@@ -16,6 +16,7 @@ public class SoundOnDie : MonoBehaviour {
 	public void Play () {
         if (!_audioSource.isPlaying)
         {
+            
             int rng = Mathf.FloorToInt(Random.Range(0.0f, 100.0f * (Clips.Length - 1))) % Clips.Length;
             _audioSource.clip = Clips[rng];
             _audioSource.Play();

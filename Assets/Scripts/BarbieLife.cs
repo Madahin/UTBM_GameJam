@@ -21,22 +21,37 @@ public class BarbieLife : MonoBehaviour {
 
     public void decreaseLife(int degats)
     {
+        
+
         // check si barbie die
         life = life - degats;
         if(life == -1)
         {
-            SoundOnDommage sod = GetComponent<SoundOnDommage>();
-
+            SoundOnDie sod = GetComponent<SoundOnDie>();
             if (sod != null)
             {
+                GetComponent<AudioClipRandomizer>().StopAudio();
+                GetComponent<AudioClipRandomizer>().enabled = false;
                 sod.Play();
             }
+
+            Destroy(GameManager.Instance.ambientMusic);
 
             _controller.enabled = false;
             _rigidBody.detectCollisions = false;
             _colider.enabled = false;
             
             StartCoroutine(LookAtDeath());
+        }
+        else
+        {
+            SoundOnDommage sod = GetComponent<SoundOnDommage>();
+
+            if (sod != null)
+            {
+                GetComponent<AudioClipRandomizer>().StopAudio();
+                sod.Play();
+            }
         }
     }
 

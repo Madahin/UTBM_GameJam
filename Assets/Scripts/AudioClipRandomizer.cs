@@ -25,6 +25,13 @@ public class AudioClipRandomizer : MonoBehaviour {
 
     }
 
+    public void StopAudio()
+    {
+        checkClip = true;
+        StopAllCoroutines();
+        _audioSource.Stop();
+    }
+
     private bool checkClip = true;
 
 	// Update is called once per frame

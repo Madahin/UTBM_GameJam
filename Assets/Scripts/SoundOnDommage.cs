@@ -19,8 +19,9 @@ public class SoundOnDommage : MonoBehaviour {
 
         if (!_audioSource.isPlaying)
         {
-            _audioSource.clip = Clips[rng];
-            _audioSource.Play();
+        
+        _audioSource.clip = Clips[rng];
+        _audioSource.Play();
         }
     }
 }

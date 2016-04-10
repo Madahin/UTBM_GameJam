@@ -18,4 +18,9 @@ public class MenuScript : MonoBehaviour {
     {
         GameManager.Instance.LoadLevel("Level1");
     }
+     public void RageQuit()
+    {
+        Application.Quit();
+    }
+
 }

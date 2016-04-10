@@ -16,7 +16,7 @@ public abstract class AbstractIAControler : MonoBehaviour {
     private NavMeshPath path;
     private float elapsed = 0.0f;
 
-    private bool hasSawPlayer = false;
+    public bool hasSawPlayer = false;
 
     protected NavMeshAgent agent;
 

@@ -27,7 +27,9 @@ public class CameraEffect : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        if (Input.GetKeyDown(KeyCode.E) && !ispressed)
+        
+
+        /*if (Input.GetKeyDown(KeyCode.E) && !ispressed)
         {
             _life.decreaseLife(1);
             ispressed = true;
@@ -39,7 +41,7 @@ public class CameraEffect : MonoBehaviour {
         }
 
         if (Input.GetKeyDown(KeyCode.R))
-            _life.life = 5;
+            _life.life = 5;*/
 
         if(lastlifePoint != _life.life)
         {

@@ -12,9 +12,14 @@ public class CutSceneSquirelEvent : MonoBehaviour {
     public Material badSquirellMaterial;
     public GameObject BadSquirell;
 
+    private GameObject boss;
+
+    public GameObject door;
+
     public float speedWall = 1f;
 
     private bool canMoveWall = false;
+    private bool battleBegin = false;
 
 	// Use this for initialization
 	void Start () {
@@ -26,6 +31,11 @@ public class CutSceneSquirelEvent : MonoBehaviour {
         if(canMoveWall)
         {
             wall.transform.position = Vector3.Lerp(wall.transform.position, new Vector3(wall.transform.position.x, 14.5f, wall.transform.position.z), Time.deltaTime * speedWall);
+        }
+
+        if(battleBegin && boss == null)
+        {
+            door.SetActive(true);
         }
     }
 
@@ -58,6 +68,9 @@ public class CutSceneSquirelEvent : MonoBehaviour {
 
         playerCamera.enabled = true;
         cutsceneCamera.enabled = false;
+
+        boss = squirell;
+        battleBegin = true;
     }
 
     void OnTriggerEnter(Collider other)
