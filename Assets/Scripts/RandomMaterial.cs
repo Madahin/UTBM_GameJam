@@ -6,6 +6,8 @@ public class RandomMaterial : MonoBehaviour {
 
     public List<Material> materials;
 
+    public AudioClip[] clips;
+
     private MeshRenderer _renderer;
 	// Use this for initialization
 	void Start () {
