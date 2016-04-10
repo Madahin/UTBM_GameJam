@@ -7,7 +7,7 @@ public class FadeScreenAutoRef : MonoBehaviour {
     private Image fadeScreen;
     private Color _transparentColor;
     private Color _opaqueColor;
-    public const float _fadeTime = 3.0f;
+    public const float _fadeTime = 3.5f;
     private float _fadeTimer;
 
     // Use this for initialization
@@ -22,14 +22,14 @@ public class FadeScreenAutoRef : MonoBehaviour {
         _opaqueColor = new Color(fadeScreen.color.r,
                                     fadeScreen.color.g,
                                     fadeScreen.color.b,
-                                    fadeScreen.color.a);
+                                    1.0f);
 
         _transparentColor = new Color(fadeScreen.color.r,
                                         fadeScreen.color.g,
                                         fadeScreen.color.b,
                                         0.0f);
 
-        StopCoroutine(FadeInDelayed());
+        StopAllCoroutines();
         _fadeTimer = 0.0f;
         StartCoroutine(FadeInDelayed());
         }
@@ -50,14 +50,14 @@ public class FadeScreenAutoRef : MonoBehaviour {
         _opaqueColor = new Color(fadeScreen.color.r,
                                     fadeScreen.color.g,
                                     fadeScreen.color.b,
-                                    fadeScreen.color.a);
+                                    1.0f);
 
         _transparentColor = new Color(fadeScreen.color.r,
                                         fadeScreen.color.g,
                                         fadeScreen.color.b,
                                         0.0f);
 
-        StopCoroutine(FadeInDelayed());
+        StopAllCoroutines();
         _fadeTimer = 0.0f;
         StartCoroutine(FadeOutDelayed());
     }
@@ -68,7 +68,7 @@ public class FadeScreenAutoRef : MonoBehaviour {
         while (_fadeTimer < _fadeTime)
         {
             _fadeTimer = _fadeTimer + Time.deltaTime;
-            fadeScreen.color = Color.Lerp( _transparentColor, _opaqueColor, _fadeTimer / _fadeTime);
+            fadeScreen.color = Color.Lerp(_transparentColor, _opaqueColor,   _fadeTimer / _fadeTime);
             yield return new WaitForEndOfFrame();
         }
     }
