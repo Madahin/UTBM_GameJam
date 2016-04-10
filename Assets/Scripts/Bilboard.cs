@@ -9,8 +9,8 @@ public class Bilboard : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
-        
+	void Update ()
+    {
         this.transform.rotation = Camera.main.transform.rotation;
     }
     
