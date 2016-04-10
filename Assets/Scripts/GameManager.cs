@@ -6,6 +6,7 @@ public class GameManager : Singleton<GameManager> {
 
     public FadeScreenAutoRef fadeScreen;
     public GameObject Player;
+    public GameObject CadreVie;
     public string currentScene;
 
    

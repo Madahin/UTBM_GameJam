@@ -38,7 +38,7 @@ public abstract class AbstractIAControler : MonoBehaviour {
 	protected virtual void Update ()
     {
         distanceBetweenTarget = Vector3.Distance(transform.position, target.position);
-        
+
         if (!stop && distanceBetweenTarget > minDistance && distanceBetweenTarget < maxDistance)
         {
             agent.Resume();
@@ -46,7 +46,7 @@ public abstract class AbstractIAControler : MonoBehaviour {
             RaycastHit hit;
             bool hasHit = Physics.Linecast(transform.position, target.position, out hit);
 
-            if (!hasHit || hit.transform.gameObject.name == "Barbie")
+            if (!hasHit || hit.transform.gameObject.tag == "Player")
             {
                 hasSawPlayer = true;
             }
